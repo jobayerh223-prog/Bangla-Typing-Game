@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বর্ণমালা মাস্টার — ৫০০ ধাপে বাংলা টাইপিং</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14121f;
+    --panel:#1e1b2e;
+    --panel-2:#262238;
+    --panel-3:#2d2842;
+    --text:#f2efe6;
+    --text-muted:#a79fc0;
+    --gold:#d4a94c;
+    --gold-soft:rgba(212,169,76,0.16);
+    --gold-dim:rgba(212,169,76,0.45);
+    --green:#4cae7d;
+    --green-soft:rgba(76,174,125,0.16);
+    --red:#e0525a;
+    --red-soft:rgba(224,82,90,0.18);
+    --pink:#ef6f8e;
+    --pink-soft:rgba(239,111,142,0.18);
+    --border:#332f4a;
+    --shadow:0 10px 30px rgba(0,0,0,0.35);
+    --radius:16px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
+  body, .panel, .practice-card, .stat-chip, .node, .type-area, .results-card, footer, .tip, .theme-toggle{
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+  }
+  .btn, .node, .theme-toggle{user-select:none; -webkit-user-select:none; touch-action:manipulation;}
+  .btn{transition: transform .1s ease, background-color .18s ease, border-color .18s ease, color .18s ease;}
+  .btn:active{transform:scale(0.96);}
+  .node{transition: transform .12s ease, border-color .18s ease, background-color .18s ease;}
+  .node:active{transform:scale(0.92) !important;}
+  .theme-toggle:active{transform:scale(0.92);}
+  .type-area:focus-within{box-shadow:0 0 0 2px var(--gold-dim);}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Work Sans',sans-serif;}
+  body{min-height:100vh;background:
+      radial-gradient(circle at 15% 8%, rgba(212,169,76,0.08), transparent 40%),
+      radial-gradient(circle at 85% 92%, rgba(76,174,125,0.06), transparent 45%),
+      var(--bg);
+  }
+  .app{max-width:980px;margin:0 auto;padding:28px 18px 60px;}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+  .brand-mark{width:46px;height:46px;border-radius:12px;background:linear-gradient(155deg,var(--gold),#a97e2d);display:flex;align-items:center;justify-content:center;font-family:'Baloo Da 2',sans-serif;font-weight:800;font-size:22px;color:#1a1626;flex-shrink:0;box-shadow:0 6px 16px rgba(212,169,76,0.35);}
+  h1{font-family:'Baloo Da 2',sans-serif;font-weight:800;font-size:26px;margin:0;letter-spacing:0.2px;}
+  .subtitle{color:var(--text-muted);font-size:13.5px;margin-top:2px;}
+  .top-stats{display:flex;gap:10px;margin:18px 0;flex-wrap:wrap;}
+  .stat-chip{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:10px 16px;flex:1;min-width:110px;}
+  .stat-chip .num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:19px;color:var(--gold);}
+  .stat-chip .lbl{font-size:11px;color:var(--text-muted);margin-top:2px;}
+  .tip{font-size:12.5px;color:var(--text-muted);background:var(--panel);border:1px dashed var(--border);border-radius:10px;padding:9px 13px;margin-bottom:10px;}
+  .tip b{color:var(--gold);font-weight:600;}
+  .section-label{font-family:'Baloo Da 2',sans-serif;font-size:15px;color:var(--text-muted);margin:22px 2px 8px;}
+
+  .overview-panel{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 18px;margin:18px 0;flex-wrap:wrap;box-shadow:var(--shadow);}
+  .ring-item{display:flex;flex-direction:column;align-items:center;flex:1;min-width:90px;}
+  .ring-wrap{position:relative;width:88px;height:88px;flex-shrink:0;}
+  .ring{width:88px;height:88px;transform:rotate(-90deg);}
+  .ring-bg{fill:none;stroke:var(--panel-2);stroke-width:9;}
+  .ring-fill{fill:none;stroke:var(--gold);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .6s ease;}
+  .ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .ring-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;color:var(--gold);}
+  .ring-sub{font-size:9.5px;color:var(--text-muted);margin-top:2px;}
+  .ring-name{font-family:'Baloo Da 2',sans-serif;font-size:13.5px;color:var(--text);margin-top:10px;font-weight:600;}
+  .ring-count{font-size:10.5px;color:var(--text-muted);margin-top:1px;}
+  .bar-sub{font-size:10.5px;color:var(--text-muted);}
+
+  /* ---------- MAP VIEW ---------- */
+  .chapter{margin-bottom:26px;}
+  .chapter-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;}
+  .chapter-head h2{font-family:'Baloo Da 2',sans-serif;font-size:18px;margin:0;color:var(--gold);}
+  .chapter-head span{font-size:11.5px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+  .node-row{display:flex;flex-wrap:wrap;gap:9px;position:relative;}
+  .node{
+    width:44px;height:44px;border-radius:50%;border:2px solid var(--border);
+    background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    cursor:pointer;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12.5px;color:var(--text-muted);
+    position:relative;transition:transform .15s ease, border-color .15s ease;
+  }
+  .node:hover{transform:translateY(-2px);}
+  .node.locked{opacity:0.55;}
+  .node.done{border-color:var(--gold);background:var(--gold-soft);color:var(--gold);}
+  .node.current{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft);animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--gold-soft);}50%{box-shadow:0 0 0 8px transparent;}}
+  .node .stars{font-size:7px;letter-spacing:1px;margin-top:1px;color:var(--gold);}
+  .node .lock{font-size:12px;}
+
+  /* ---------- PRACTICE VIEW ---------- */
+  .practice-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px;box-shadow:var(--shadow);}
+  .practice-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:10px;flex-wrap:wrap;}
+  .back-btn{background:none;border:1px solid var(--border);color:var(--text-muted);padding:8px 14px;border-radius:9px;font-size:13px;cursor:pointer;font-family:'Work Sans',sans-serif;}
+  .back-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+  .level-tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:5px 10px;border-radius:8px;}
+  .level-title{font-family:'Baloo Da 2',sans-serif;font-size:20px;margin:4px 0 20px;}
+  .type-area{
+    position:relative;
+    font-family:'Hind Siliguri',sans-serif;font-size:27px;line-height:2;letter-spacing:0.4px;
+    background:var(--panel-2);border-radius:12px;padding:20px 22px;margin-bottom:8px;min-height:120px;
+    width:100%;max-width:100%;overflow-wrap:anywhere;word-break:normal;white-space:normal;
+    cursor:text;
+  }
+  .type-area .hint{display:block;font-size:11px;color:var(--text-muted);font-family:'Work Sans',sans-serif;opacity:.7;margin-top:12px;}
+  .typed-line{margin:0 2px 10px;font-family:'Hind Siliguri',sans-serif;font-size:18px;font-weight:500;white-space:nowrap;overflow-x:auto;background:transparent;border:none;padding:0;color:var(--text-muted);min-height:24px;}
+  .typed-line .tg{padding:0 1px;}
+  .typed-line .tg.correct{color:var(--green);}
+  .typed-line .tg.incorrect{color:var(--red);text-decoration:underline;}
+  .typed-line .placeholder{opacity:.55;}
+  .hidden-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;border:none;padding:20px 22px;margin:0;font-size:27px;caret-color:transparent;background:transparent;color:transparent;resize:none;}
+  .g{border-radius:3px;transition:opacity .12s ease;}
+  .g.pending{opacity:0.4;color:var(--text);}
+  .g.correct{opacity:1;color:var(--green);background:var(--green-soft);}
+  .g.incorrect{opacity:1;color:var(--red);background:var(--red-soft);text-decoration:underline wavy var(--red);}
+  .g.current{opacity:1;background:var(--pink);color:#1a1626;box-shadow:0 0 0 2px var(--pink-soft);}
+  .stats-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .stats-row .box{flex:1;min-width:90px;background:var(--panel-2);border-radius:10px;padding:10px 12px;text-align:center;}
+  .stats-row .box .v{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px;color:var(--gold);}
+  .stats-row .box .l{font-size:10.5px;color:var(--text-muted);margin-top:2px;}
+  .progress-bar{height:6px;background:var(--panel-2);border-radius:6px;overflow:hidden;margin-top:16px;}
+  .progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--gold),#f0d597);transition:width .2s ease;}
+  .actions{display:flex;gap:10px;margin-top:18px;}
+  .actions-split{justify-content:space-between;align-items:center;flex-wrap:wrap;}
+  .actions-left{display:flex;gap:10px;flex-wrap:wrap;}
+  .actions-right{display:flex;gap:10px;flex-wrap:wrap;}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;}
+  .theme-toggle{position:fixed;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--panel);color:var(--text);font-size:19px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:40;box-shadow:var(--shadow);}
+  body.light-theme{
+    --bg:#ffffff; --panel:#ffffff; --panel-2:#f4f4f6; --panel-3:#ebebef;
+    --text:#2b2440; --text-muted:#6b6380;
+    --gold:#b8842e; --gold-soft:rgba(184,132,46,0.14); --gold-dim:rgba(184,132,46,0.4);
+    --green:#2f8f5b; --green-soft:rgba(47,143,91,0.14);
+    --red:#c73f47; --red-soft:rgba(199,63,71,0.14);
+    --pink:#e0567a; --pink-soft:rgba(224,86,122,0.18);
+    --border:#e4e2ea;
+    --shadow:0 8px 20px rgba(30,20,60,0.07);
+    background:#ffffff !important;
+  }
+  .btn{border:none;padding:11px 18px;border-radius:10px;font-family:'Work Sans',sans-serif;font-weight:600;font-size:13.5px;cursor:pointer;}
+  .btn-ghost{background:none;border:1px solid var(--border);color:var(--text-muted);}
+  .btn-ghost:hover{color:var(--text);border-color:var(--text-muted);}
+  .btn-gold{background:linear-gradient(155deg,var(--gold),#a97e2d);color:#1a1626;}
+
+  /* ---------- OVERLAYS ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(10,9,16,0.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:30;}
+  .results-card{background:var(--panel);border:1px solid var(--gold-dim);border-radius:18px;padding:32px 28px;max-width:380px;width:100%;text-align:center;box-shadow:var(--shadow);}
+  .results-card h3{font-family:'Baloo Da 2',sans-serif;font-size:22px;margin:6px 0 4px;color:var(--gold);}
+  .results-card .sub{color:var(--text-muted);font-size:13px;margin-bottom:18px;}
+  .stars-big{font-size:26px;letter-spacing:6px;color:var(--gold);margin-bottom:8px;}
+  .results-grid{display:flex;gap:8px;margin-bottom:22px;}
+  .results-grid .box{flex:1;background:var(--panel-2);border-radius:10px;padding:12px 6px;}
+  .results-grid .v{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:19px;color:var(--text);}
+  .results-grid .l{font-size:10px;color:var(--text-muted);margin-top:3px;}
+
+  footer{margin-top:36px;text-align:center;color:var(--text-muted);font-size:11.5px;}
+  @media(max-width:520px){
+    .type-area{font-size:20px;}
+    .hidden-input{font-size:20px;}
+    h1{font-size:21px;}
+    .node{width:38px;height:38px;font-size:11px;}
+    .theme-toggle{top:12px;right:12px;width:38px;height:38px;font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================= SEGMENTATION (with NFC normalize fix for নুক্তা letters ড়,ঢ়,য়) ================= */
+  function segment(str){
+    var normalized = str.normalize ? str.normalize('NFC') : str;
+    if(typeof Intl !== 'undefined' && Intl.Segmenter){
+      try{
+        const seg = new Intl.Segmenter('bn', {granularity:'grapheme'});
+        return Array.from(seg.segment(normalized), s => s.segment);
+      }catch(e){}
+    }
+    return Array.from(normalized);
+  }
+
+  /* ================= PRNG ================= */
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function shuffle(arr, rnd){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(rnd()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  /* ================= CONTENT DATA ================= */
+  const VOWELS = ['অ','আ','ই','ঈ','উ','ঊ','ঋ','এ','ঐ','ও','ঔ'];
+  const CONSONANTS = ['ক','খ','গ','ঘ','ঙ','চ','ছ','জ','ঝ','ঞ','ট','ঠ','ড','ঢ','ণ','ত','থ','দ','ধ','ন','প','ফ','ব','ভ','ম','য','র','ল','শ','ষ','স','হ','ড়','ঢ়','য়','ৎ'];
+  const KARS = ['া','ি','ী','ু','ূ','ৃ','ে','ৈ','ো','ৌ'];
+  const KAR_BASES = ['ক','খ','গ','চ','জ','ট','ত','দ','ন','প','ব','ম','য','র','ল','শ','স','হ'];
+  const JUKTAKKHOR = ['ক্ষ','জ্ঞ','ত্র','ন্দ','স্ব','ণ্ড','ঙ্গ','ন্ত','ষ্ট','ন্ধ','স্থ','ক্ত','দ্ধ','ম্প','ন্ট','ল্প','র্ক','র্থ','ষ্ণ','জ্জ','ঞ্চ','ঞ্জ','ক্ল','গ্ল','ঙ্ক','ঙ্খ','চ্ছ','জ্ব','ত্ম','দ্ভ','ন্ম','ব্দ','ব্ধ','ম্ভ','ম্ল','ল্ল','শ্চ','ষ্প','স্ত','স্ন'];
+  const WORDS = ["আমি","তুমি","সে","আমরা","তোমরা","তারা","বাংলা","ভাষা","দেশ","মা","বাবা","ভাই","বোন","ঘর","জল","আগুন","আকাশ","বাতাস","সূর্য","চাঁদ","নক্ষত্র","নদী","পাহাড়","গাছ","ফুল","ফল","পাখি","মাছ","বই","কলম","স্কুল","শিক্ষক","ছাত্র","বন্ধু","গ্রাম","শহর","সকাল","দুপুর","বিকাল","রাত","খাবার","চা","দুধ","ভাত","রঙ","খেলা","গান","নাচ","ছবি","আলো","অন্ধকার","সময়","দিন","মাস","বছর","সপ্তাহ","ঘড়ি","টেবিল","চেয়ার","দরজা","জানালা","রাস্তা","টাকা","কাজ","বিশ্রাম","ঘুম","স্বপ্ন","ভালোবাসা","হাসি","কান্না","ভয়","সাহস","স্বাস্থ্য","ডাক্তার","ওষুধ","হাসপাতাল","পুলিশ","কৃষক","জেলে","শিল্পী","খেলোয়াড়","নেতা","রাজা","রানী","সমাজ","সংস্কৃতি","উৎসব","ঈদ","নববর্ষ","বৃষ্টি","বরফ","মেঘ","ঝড়","সাগর"];
+  const PHRASES = [
+    "আমি ভাত খাই।","তুমি কেমন আছ?","আজ আকাশ পরিষ্কার।","বাইরে বৃষ্টি হচ্ছে।","আমার নাম করিম।",
+    "সে প্রতিদিন স্কুলে যায়।","বাংলাদেশ আমার দেশ।","নদীর জল স্বচ্ছ।","পাখিরা গাছে বসে গান গায়।","শিশুরা মাঠে খেলা করে।",
+    "আমরা একসাথে বই পড়ি।","মা রান্নাঘরে রান্না করছেন।","বাবা অফিসে গেছেন।","আমার বন্ধু খুব ভালো।","গ্রামের বাতাস অনেক মিষ্টি।",
+    "সূর্য পূর্ব দিকে ওঠে।","চাঁদ রাতে আকাশে হাসে।","শিক্ষক ছাত্রদের পড়ান।","বাজারে অনেক মানুষ আছে।","আমি প্রতিদিন হাঁটতে যাই।",
+    "দুপুরে আমরা ভাত খাই।","বিকালে বৃষ্টি নামল।","ছেলেরা মাঠে ফুটবল খেলছে।","তুমি কোথায় থাকো?",
+    "আকাশে মেঘ জমেছে।","বাতাসে ফুলের গন্ধ ভাসছে।","আমরা বাগানে গাছ লাগালাম।","শীতকালে পাখিরা দক্ষিণে চলে যায়।","রাতে আকাশ ভরা তারা দেখা যায়।",
+    "গ্রীষ্মকালে গরম বেশি পড়ে।","বর্ষায় নদীর পানি বেড়ে যায়।","আমার প্রিয় খেলা ফুটবল।","সে গান গাইতে ভালোবাসে।","তারা প্রতি রবিবার বাজারে যায়।",
+    "আমাদের বাড়িতে একটি বিড়াল আছে।","শিক্ষকরা জ্ঞান বিতরণ করেন।","বই আমাদের সবচেয়ে ভালো বন্ধু।","সততা সবচেয়ে বড় গুণ।","পরিশ্রম সাফল্যের চাবিকাঠি।",
+    "একতাই বল।","সময়ের কাজ সময়ে করা উচিত।","স্বাস্থ্যই সকল সুখের মূল।","সবাই মিলে কাজ করলে সহজ হয়।","আমরা পরিবেশ রক্ষা করব।",
+    "গাছ লাগান, পরিবেশ বাঁচান।","শিশুরা দেশের ভবিষ্যৎ।","পরিশ্রমী মানুষ কখনো হারে না।","আমাদের সবার উচিত নিয়ম মেনে চলা।"
+  ];
+  const PARAGRAPHS = [
+    "আমাদের গ্রামের পাশে একটি ছোট নদী আছে। প্রতিদিন সকালে জেলেরা মাছ ধরতে যায়। নদীর জল খুব স্বচ্ছ এবং ঠান্ডা। শিশুরা বিকালে নদীর পাড়ে খেলা করে।",
+    "বাংলাদেশ ছয় ঋতুর দেশ। প্রতিটি ঋতুর নিজস্ব সৌন্দর্য আছে। বর্ষাকালে আকাশ মেঘে ঢাকা থাকে। শীতকালে সকালে কুয়াশা পড়ে।",
+    "আমার স্কুলটি বাড়ি থেকে বেশি দূরে নয়। প্রতিদিন আমি হেঁটে স্কুলে যাই। শিক্ষকরা আমাদের অনেক যত্ন করে পড়ান। ছুটির পর আমরা মাঠে খেলি।",
+    "গ্রামের মানুষ সাধারণত কৃষিকাজ করে। তারা ভোরবেলা মাঠে যায় এবং সারাদিন কাজ করে। ধান কাটার সময় সবাই একসাথে কাজ করে। সন্ধ্যায় তারা ক্লান্ত হয়ে বাড়ি ফেরে।",
+    "শীতের সকালে চারদিকে কুয়াশা থাকে। রোদ উঠলে কুয়াশা আস্তে আস্তে সরে যায়। মানুষ গরম কাপড় পরে বাইরে বের হয়। খেজুরের রস খেতে সবাই পছন্দ করে।",
+    "বইমেলা বাঙালির প্রিয় একটি অনুষ্ঠান। প্রতি বছর ফেব্রুয়ারি মাসে এই মেলা বসে। হাজার হাজার মানুষ নতুন বই কিনতে আসে। লেখকরা পাঠকদের সাথে দেখা করেন।",
+    "পাহাড়ি এলাকায় প্রকৃতি অনেক সুন্দর। উঁচু পাহাড় আর সবুজ গাছপালা মন ভালো করে দেয়। ঝর্ণার পানি পাথরের উপর দিয়ে বয়ে যায়। পর্যটকরা এই দৃশ্য দেখতে দূর থেকে আসে।",
+    "আমাদের ভাষা বাংলা অনেক মিষ্টি এবং সমৃদ্ধ। কবি ও লেখকরা এই ভাষায় অসংখ্য গল্প ও কবিতা লিখেছেন। ভাষার প্রতি ভালোবাসা রাখা আমাদের সকলের দায়িত্ব। ছোটবেলা থেকেই শুদ্ধভাবে বাংলা শেখা জরুরি।",
+    "সমুদ্রের ধারে বসে সূর্যাস্ত দেখা এক অসাধারণ অভিজ্ঞতা। ঢেউগুলো বালুর উপর আছড়ে পড়ে। পাখিরা আকাশে উড়ে বেড়ায়। মানুষজন সৈকতে হাঁটাহাঁটি করে।",
+    "প্রযুক্তির উন্নতির সাথে সাথে আমাদের জীবনযাত্রা বদলে যাচ্ছে। এখন কম্পিউটার ও মোবাইল ফোন ছাড়া চলা কঠিন। তবে বই পড়া এবং হাতে লেখার অভ্যাস এখনও গুরুত্বপূর্ণ। প্রযুক্তি ব্যবহার করেও আমরা নিজেদের ভাষা ও সংস্কৃতি ধরে রাখতে পারি।",
+    "খেলাধুলা শরীর ও মন দুটোই ভালো রাখে। ফুটবল, ক্রিকেট ও ব্যাডমিন্টন আমাদের দেশে খুব জনপ্রিয়। ছোট থেকে বড় সবাই মাঠে খেলতে ভালোবাসে। নিয়মিত খেলাধুলা করলে শরীর সুস্থ থাকে।",
+    "বন্ধুত্ব জীবনের এক মূল্যবান সম্পদ। ভালো বন্ধু সুখে-দুঃখে পাশে থাকে। প্রকৃত বন্ধু কখনো স্বার্থপর হয় না। তাই প্রত্যেকের উচিত ভালো বন্ধু নির্বাচন করা।",
+    "পরিবেশ রক্ষা করা আমাদের সকলের দায়িত্ব। গাছ কাটা কমিয়ে বেশি বেশি গাছ লাগাতে হবে। প্লাস্টিকের ব্যবহার কমালে পরিবেশ দূষণ কমে। একটি সুস্থ পরিবেশ ভবিষ্যৎ প্রজন্মের জন্য জরুরি।",
+    "কৃষি বাংলাদেশের অর্থনীতির প্রধান ভিত্তি। ধান, পাট ও সবজি এদেশের প্রধান ফসল। কৃষকরা কঠোর পরিশ্রম করে ফসল ফলান। তাদের পরিশ্রমেই দেশের খাদ্য চাহিদা পূরণ হয়।",
+    "ঈদ মুসলিমদের সবচেয়ে বড় উৎসব। এই দিনে সবাই নতুন পোশাক পরে এবং একে অপরের সাথে দেখা করে। ঘরে ঘরে সুস্বাদু খাবার রান্না হয়। শিশুরা ঈদের দিন খুব আনন্দ করে।",
+    "স্বাস্থ্য ভালো রাখতে নিয়মিত ব্যায়াম করা জরুরি। প্রতিদিন পর্যাপ্ত পানি পান করতে হবে। পুষ্টিকর খাবার শরীরকে সুস্থ রাখে। পর্যাপ্ত ঘুমও স্বাস্থ্যের জন্য অপরিহার্য।",
+    "প্রযুক্তি আজকাল শিক্ষার ক্ষেত্রেও ব্যাপক পরিবর্তন এনেছে। অনলাইনে ক্লাস করার সুযোগ বেড়েছে। শিক্ষার্থীরা এখন ইন্টারনেট থেকে সহজে তথ্য পায়। তবে বই পড়ার অভ্যাস এখনও গুরুত্বপূর্ণ।",
+    "শীতের সন্ধ্যায় পিঠা খাওয়ার মজাই আলাদা। গ্রামের বাড়িতে বাড়িতে পিঠা তৈরি হয়। ভাপা পিঠা, চিতই পিঠা সবার প্রিয়। পরিবারের সবাই একসাথে বসে পিঠা খায়।",
+    "একটি শহরের ব্যস্ততা সবসময় চোখে পড়ার মতো। রাস্তায় গাড়ির শব্দ আর মানুষের ভিড় লেগেই থাকে। অফিসগামী মানুষ তাড়াহুড়ো করে হাঁটে। সন্ধ্যা নামলে শহরের আলো ঝলমল করে ওঠে।",
+    "আমাদের দেশের নদীগুলো অত্যন্ত গুরুত্বপূর্ণ। নদীপথে মালামাল পরিবহন করা হয়। জেলেরা নদী থেকে মাছ ধরে জীবিকা নির্বাহ করে। নদীর তীরে অনেক গ্রাম গড়ে উঠেছে।",
+    "একটি শিশুর প্রথম শিক্ষক তার মা-বাবা। পরিবার থেকেই শিশু ভদ্রতা ও নিয়ম শেখে। ভালো অভ্যাস গড়ে তোলার সময় শৈশব থেকেই শুরু হয়। তাই পরিবারের ভূমিকা অত্যন্ত গুরুত্বপূর্ণ।",
+    "পাহাড়ে ভ্রমণ করা এক অন্যরকম অভিজ্ঞতা। উঁচু রাস্তা দিয়ে গাড়ি চলে মেঘের ভেতর দিয়ে। ঠান্ডা বাতাস শরীর জুড়িয়ে দেয়। পাহাড়ি মানুষের জীবনযাত্রা অনেকটাই সহজ-সরল।",
+    "বিজ্ঞান আমাদের জীবনকে সহজ করে দিয়েছে। বিদ্যুৎ, ইন্টারনেট ও চিকিৎসাবিজ্ঞানের উন্নতি মানুষের উপকারে এসেছে। তবে প্রযুক্তির সঠিক ব্যবহার জানা জরুরি। ভবিষ্যতে বিজ্ঞান আরও অনেক পরিবর্তন আনবে।",
+    "আমাদের সংস্কৃতি বহু বছরের ঐতিহ্যে সমৃদ্ধ। গান, নাচ ও নাটক এই সংস্কৃতির অংশ। পহেলা বৈশাখে আমরা নতুন বছরকে বরণ করি। এই ঐতিহ্য রক্ষা করা আমাদের দায়িত্ব।"
+  ];
+
+  /* ================= LEVEL GENERATION (500 levels) ================= */
+  const levels = [];
+
+  function buildIntroChapter(chapterName, pool, totalLevels, seedBase, reviewCount, repeatNew){
+    const arr = [];
+    const introLevels = Math.min(totalLevels, pool.length);
+    for(let i=0;i<introLevels;i++){
+      const newOnes = pool.slice(i, i+1);
+      const reviewPool = pool.slice(0, i+1);
+      const rnd = mulberry32(seedBase+i);
+      const seq = [];
+      for(let r=0;r<repeatNew;r++) seq.push(...shuffle(newOnes, rnd));
+      seq.push(...shuffle(reviewPool, rnd).slice(0, reviewCount));
+      arr.push({chapter:chapterName, title:chapterName+' পর্ব '+(i+1), text: seq.join(' ')});
+    }
+    for(let j=introLevels;j<totalLevels;j++){
+      const rnd = mulberry32(seedBase+5000+j);
+      const seq = [];
+      for(let r=0;r<5;r++) seq.push(...shuffle(pool, rnd));
+      arr.push({chapter:chapterName, title:chapterName+' পর্ব '+(j+1)+' (দক্ষতা)', text: seq.slice(0,24).join(' ')});
+    }
+    return arr;
+  }
+
+  function buildMatraChapter(totalLevels, seedBase){
+    const arr = [];
+    let count = 0;
+    for(let k=0;k<KARS.length && count<totalLevels;k++){
+      for(let v=0; v<3 && count<totalLevels; v++){
+        const rnd = mulberry32(seedBase+count);
+        const bases = shuffle(KAR_BASES, rnd).slice(0,10);
+        const seq = bases.map(b=>b+KARS[k]);
+        const full = [...seq, ...shuffle(seq, rnd)];
+        arr.push({chapter:'কার-চিহ্ন', title:'মাত্রা অনুশীলন পর্ব '+(count+1), text: full.join(' ')});
+        count++;
+      }
+    }
+    while(count<totalLevels){
+      const rnd = mulberry32(seedBase+9000+count);
+      const combos = [];
+      for(let x=0;x<14;x++){
+        const b = KAR_BASES[Math.floor(rnd()*KAR_BASES.length)];
+        const k = KARS[Math.floor(rnd()*KARS.length)];
+        combos.push(b+k);
+      }
+      arr.push({chapter:'কার-চিহ্ন', title:'মাত্রা অনুশীলন পর্ব '+(count+1)+' (মিশ্র)', text: combos.join(' ')});
+      count++;
+    }
+    return arr;
+  }
+
+  function buildWordChapter(totalLevels, seedBase){
+    const arr = [];
+    const rnd0 = mulberry32(seedBase);
+    const shuffled = shuffle(WORDS, rnd0);
+    const perLevel = 3;
+    for(let i=0;i<totalLevels;i++){
+      const rnd = mulberry32(seedBase+i);
+      const start = (i*perLevel) % shuffled.length;
+      const chosen = [];
+      for(let k=0;k<perLevel;k++) chosen.push(shuffled[(start+k)%shuffled.length]);
+      const seq = [];
+      for(let r=0;r<5;r++) seq.push(...shuffle(chosen, rnd));
+      arr.push({chapter:'শব্দ', title:'শব্দ অনুশীলন পর্ব '+(i+1), text: seq.join(' ')});
+    }
+    return arr;
+  }
+
+  function buildSentenceChapter(totalLevels, seedBase){
+    const arr = [];
+    for(let i=0;i<totalLevels;i++){
+      const rnd = mulberry32(seedBase+i);
+      const idxs = shuffle(PHRASES.map((_,idx)=>idx), rnd);
+      const pick = (i%3===0) ? 1 : 2;
+      const chosen = idxs.slice(0,pick).map(idx=>PHRASES[idx]);
+      arr.push({chapter:'বাক্য', title:'বাক্য অনুশীলন পর্ব '+(i+1), text: chosen.join(' ')});
+    }
+    return arr;
+  }
+
+  function buildParagraphChapter(totalLevels, seedBase){
+    const arr = [];
+    for(let i=0;i<totalLevels;i++){
+      const rnd = mulberry32(seedBase+i);
+      const idx1 = Math.floor(rnd()*PARAGRAPHS.length);
+      let idx2 = Math.floor(rnd()*PARAGRAPHS.length);
+      const combineTwo = i%2===1;
+      let text = PARAGRAPHS[idx1];
+      if(combineTwo){
+        if(idx2===idx1) idx2 = (idx2+1)%PARAGRAPHS.length;
+        text += ' ' + PARAGRAPHS[idx2];
+      }
+      arr.push({chapter:'অনুচ্ছেদ', title:'অনুচ্ছেদ পর্ব '+(i+1), text: text});
+    }
+    return arr;
+  }
+
+  levels.push(...buildIntroChapter('স্বরবর্ণ', VOWELS, 20, 1, 8, 5));
+  levels.push(...buildIntroChapter('ব্যঞ্জনবর্ণ', CONSONANTS, 60, 100, 10, 4));
+  levels.push(...buildMatraChapter(60, 300));
+  levels.push(...buildIntroChapter('যুক্তাক্ষর', JUKTAKKHOR, 60, 500, 8, 4));
+  levels.push(...buildWordChapter(120, 700));
+  levels.push(...buildSentenceChapter(100, 900));
+  levels.push(...buildParagraphChapter(80, 1100));
+
+  const CHAPTER_ORDER = ['স্বরবর্ণ','ব্যঞ্জনবর্ণ','কার-চিহ্ন','যুক্তাক্ষর','শব্দ','বাক্য','অনুচ্ছেদ'];
+  const TOTAL_LEVELS = levels.length; // 500
+
+  /* ================= STATE ================= */
+  const LEVEL_SET_VERSION = 2;
+  function defaultProgress(){ return { version: LEVEL_SET_VERSION, unlocked: 1, scores: {}, daily:{}, weekly:{}, monthly:{} }; }
+  let progress = defaultProgress();
+  let view = 'map';
+  let currentLevel = 1;
+  let session = null;
+  let storageReady = false;
+
+  function loadProgress(){
+    try{
+      const raw = localStorage.getItem('bangla-typing-progress');
+      if(raw){
+        const parsed = JSON.parse(raw);
+        if(parsed && typeof parsed.unlocked === 'number' && parsed.version === LEVEL_SET_VERSION){
+          progress = parsed;
+          progress.daily = progress.daily || {};
+          progress.weekly = progress.weekly || {};
+          progress.monthly = progress.monthly || {};
+        } else {
+          progress = defaultProgress();
+        }
+      }
+    }catch(e){}
+    storageReady = true;
+    render();
+  }
+  function saveProgress(){
+    try{ localStorage.setItem('bangla-typing-progress', JSON.stringify(progress)); }
+    catch(e){}
+  }
+  function resetProgress(){
+    progress = defaultProgress();
+    try{ localStorage.setItem('bangla-typing-progress', JSON.stringify(progress)); }catch(e){}
+    view='map'; render();
+  }
+
+  /* ================= DATE HELPERS FOR DAILY/WEEKLY/MONTHLY ================= */
+  function pad2(n){ return n<10 ? '0'+n : ''+n; }
+  function dateKey(d){ return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
+  function weekKey(d){
+    const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const dayNum = (date.getUTCDay()+6)%7;
+    date.setUTCDate(date.getUTCDate()-dayNum+3);
+    const firstThursday = new Date(Date.UTC(date.getUTCFullYear(),0,4));
+    const week = 1+Math.round(((date-firstThursday)/86400000 - 3 + ((firstThursday.getUTCDay()+6)%7))/7);
+    return date.getUTCFullYear()+'-W'+pad2(week);
+  }
+  function monthKey(d){ return d.getFullYear()+'-'+pad2(d.getMonth()+1); }
+  function bumpPeriod(map, key, wpm){
+    if(!map[key]) map[key] = {completed:0, wpmSum:0};
+    map[key].completed += 1;
+    map[key].wpmSum += wpm;
+  }
+  function getPeriodStats(map, key){
+    const o = map[key];
+    if(!o || o.completed===0) return {completed:0, avgWpm:0};
+    return {completed:o.completed, avgWpm:Math.round(o.wpmSum/o.completed)};
+  }
+
+  /* ================= SESSION LOGIC ================= */
+  function startLevel(num){
+    if(session && session.timerId) clearInterval(session.timerId);
+    currentLevel = num;
+    const lvl = levels[num-1];
+    const target = segment(lvl.text);
+    session = {
+      target, typed: [], typedRaw:'',
+      errorPositions: new Set(),
+      startTime: null, endTime: null,
+      timerId: null, finished:false
+    };
+    view = 'practice';
+    render();
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        const input = document.getElementById('hiddenInput');
+        if(input) input.focus();
+      });
+    });
+  }
+
+  function onType(raw){
+    if(!session || session.finished) return;
+    if(session.startTime === null && raw.length>0){
+      session.startTime = Date.now();
+      session.timerId = setInterval(updateStatsOnly, 250);
+    }
+    session.typedRaw = raw;
+    const typedG = segment(raw);
+    session.typed = typedG;
+    for(let i=0;i<typedG.length && i<session.target.length;i++){
+      if(typedG[i] !== session.target[i]) session.errorPositions.add(i);
+    }
+    renderTargetOnly();
+    renderTypedLine();
+    updateStatsOnly();
+
+    if(typedG.length >= session.target.length){
+      let allMatch = true;
+      for(let i=0;i<session.target.length;i++){
+        if(typedG[i] !== session.target[i]){ allMatch = false; break; }
+      }
+      if(allMatch && typedG.length === session.target.length){
+        finishLevel();
+      }
+    }
+  }
+
+  function computeStats(){
+    const target = session.target;
+    const elapsedMs = session.startTime ? (session.endTime || Date.now()) - session.startTime : 0;
+    const minutes = Math.max(elapsedMs/60000, 1/600);
+    const wordsCount = target.length/5;
+    const wpm = session.startTime ? Math.round(wordsCount/minutes) : 0;
+    const errorCount = session.errorPositions.size;
+    const accuracy = target.length>0 ? Math.max(0, Math.round((1 - errorCount/target.length)*100)) : 100;
+    const seconds = Math.round(elapsedMs/1000);
+    const pct = Math.min(100, Math.round((session.typed.length/target.length)*100));
+    return {wpm, accuracy, seconds, pct};
+  }
+
+  function finishLevel(){
+    if(session.finished) return;
+    session.finished = true;
+    session.endTime = Date.now();
+    if(session.timerId) clearInterval(session.timerId);
+    const stats = computeStats();
+    let stars = 1;
+    if(stats.accuracy >= 95) stars = 3;
+    else if(stats.accuracy >= 82) stars = 2;
+    const existing = progress.scores[currentLevel];
+    if(!existing || stats.wpm > existing.wpm || (stats.wpm===existing.wpm && stats.accuracy>existing.accuracy)){
+      progress.scores[currentLevel] = {wpm:stats.wpm, accuracy:stats.accuracy, stars};
+    }
+    if(currentLevel === progress.unlocked && progress.unlocked < TOTAL_LEVELS){
+      progress.unlocked = currentLevel+1;
+    }
+    const now = new Date();
+    bumpPeriod(progress.daily, dateKey(now), stats.wpm);
+    bumpPeriod(progress.weekly, weekKey(now), stats.wpm);
+    bumpPeriod(progress.monthly, monthKey(now), stats.wpm);
+    saveProgress();
+    render();
+  }
+
+  function retryLevel(){ startLevel(currentLevel); }
+  function nextLevel(){
+    if(currentLevel === progress.unlocked && progress.unlocked < TOTAL_LEVELS){
+      progress.unlocked = currentLevel + 1;
+      saveProgress();
+    }
+    if(currentLevel < TOTAL_LEVELS) startLevel(currentLevel+1);
+    else { view='map'; render(); }
+  }
+  function prevLevel(){
+    if(currentLevel > 1) startLevel(currentLevel-1);
+  }
+  function goMap(){
+    if(session && session.timerId) clearInterval(session.timerId);
+    session=null; view='map'; render();
+  }
+
+  /* ================= LIVE RENDER HELPERS ================= */
+  function renderTargetOnly(){
+    const el = document.getElementById('targetText');
+    if(!el || !session) return;
+    el.innerHTML = session.target.map((g,i)=>{
+      let cls = 'g pending';
+      if(i < session.typed.length){
+        cls = session.typed[i]===g ? 'g correct' : 'g incorrect';
+      }
+      if(i === session.typed.length) cls += ' current';
+      const shown = g===' ' ? '\u00A0' : g;
+      return '<span class="'+cls+'">'+escapeHtml(shown)+'</span>';
+    }).join('');
+  }
+  function renderTypedLine(){
+    const el = document.getElementById('typedLine');
+    if(!el || !session) return;
+    if(session.typed.length===0){
+      el.innerHTML = '<span class="placeholder">আপনার টাইপ করা অক্ষরগুলো এখানে দেখা যাবে…</span>';
+      return;
+    }
+    el.innerHTML = session.typed.map((ch,i)=>{
+      const isCorrect = i<session.target.length && session.target[i]===ch;
+      const cls = isCorrect ? 'tg correct' : 'tg incorrect';
+      const shown = ch===' ' ? '\u00A0' : ch;
+      return '<span class="'+cls+'">'+escapeHtml(shown)+'</span>';
+    }).join('');
+    el.scrollLeft = el.scrollWidth;
+  }
+  function updateStatsOnly(){
+    if(!session) return;
+    const s = computeStats();
+    const wpmEl = document.getElementById('statWpm');
+    const accEl = document.getElementById('statAcc');
+    const timeEl = document.getElementById('statTime');
+    const fillEl = document.getElementById('progFill');
+    if(wpmEl) wpmEl.textContent = s.wpm;
+    if(accEl) accEl.textContent = s.accuracy+'%';
+    if(timeEl) timeEl.textContent = s.seconds+'s';
+    if(fillEl) fillEl.style.width = s.pct+'%';
+  }
+  function escapeHtml(str){
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  /* ================= MODAL POPUP ================= */
+  function openLockModal(msg, levelNum){
+    const div = document.createElement('div');
+    div.className = 'overlay';
+    div.innerHTML = '<div class="results-card" style="max-width:340px;">'+
+      '<div class="stars-big">&#128274;</div>'+
+      '<h3 style="margin-top:0;">ধাপটি লক করা আছে</h3>'+
+      '<div class="sub" style="margin-bottom:20px;">'+msg+'</div>'+
+      '<button class="btn btn-gold" id="closeLockModal" style="width:100%;">ঠিক আছে</button></div>';
+    document.body.appendChild(div);
+    div.querySelector('#closeLockModal').addEventListener('click', ()=>{ div.remove(); startLevel(levelNum); });
+    div.addEventListener('click', (e)=>{ if(e.target===div) div.remove(); });
+  }
+
+  /* ================= FULL RENDER ================= */
+  function overallStats(){
+    const doneKeys = Object.keys(progress.scores);
+    const completed = doneKeys.length;
+    let avgWpm = 0;
+    if(completed>0){
+      avgWpm = Math.round(doneKeys.reduce((a,k)=>a+progress.scores[k].wpm,0)/completed);
+    }
+    return {completed, avgWpm};
+  }
+
+  function render(){
+    const app = document.getElementById('app');
+    if(!storageReady){
+      app.innerHTML = '<div style="padding:80px 0;text-align:center;color:var(--text-muted);">লোড হচ্ছে…</div>';
+      return;
+    }
+    if(view === 'map'){ app.innerHTML = renderMap(); attachMapHandlers(); }
+    else { app.innerHTML = renderPractice(); attachPracticeHandlers(); }
+  }
+
+  function renderMap(){
+    const {completed, avgWpm} = overallStats();
+    const now = new Date();
+    const today = getPeriodStats(progress.daily, dateKey(now));
+    const thisWeek = getPeriodStats(progress.weekly, weekKey(now));
+    const thisMonth = getPeriodStats(progress.monthly, monthKey(now));
+
+    let html = '';
+    html += '<div class="brand"><div class="brand-mark">অ</div><div><h1>বর্ণমালা মাস্টার</h1><div class="subtitle">৫০০ ধাপে বাংলা টাইপিং দক্ষতা অর্জন করুন</div></div></div>';
+
+    const R = 42, C = 2*Math.PI*R;
+    const ringItem = function(pct, numText, subText, nameText, countText){
+      const clamped = Math.max(0, Math.min(100, pct));
+      const offset = (C - (clamped/100)*C).toFixed(1);
+      return '<div class="ring-item"><div class="ring-wrap"><svg viewBox="0 0 100 100" class="ring" aria-hidden="true">'+
+        '<circle cx="50" cy="50" r="'+R+'" class="ring-bg"/>'+
+        '<circle cx="50" cy="50" r="'+R+'" class="ring-fill" style="stroke-dasharray:'+C.toFixed(1)+';stroke-dashoffset:'+offset+';"/>'+
+        '</svg><div class="ring-label"><div class="ring-num">'+numText+'</div><div class="ring-sub">'+subText+'</div></div></div>'+
+        '<div class="ring-name">'+nameText+'</div><div class="ring-count">'+countText+'</div></div>';
+    };
+    const wpmScale = 80; // reference max WPM used to scale the ring fill
+    html += '<div class="overview-panel">';
+    html += ringItem(Math.round((completed/TOTAL_LEVELS)*100), completed+'/'+TOTAL_LEVELS, 'সম্পন্ন', 'সর্বমোট', avgWpm+' গড় WPM');
+    html += ringItem((today.avgWpm/wpmScale)*100, today.avgWpm, 'WPM', 'আজ', today.completed+' ধাপ');
+    html += ringItem((thisWeek.avgWpm/wpmScale)*100, thisWeek.avgWpm, 'WPM', 'সপ্তাহ', thisWeek.completed+' ধাপ');
+    html += ringItem((thisMonth.avgWpm/wpmScale)*100, thisMonth.avgWpm, 'WPM', 'মাস', thisMonth.completed+' ধাপ');
+    html += '</div>';
+
+    html += '<div class="tip"><b>টিপ:</b> টাইপ করার জন্য একটি ইউনিকোড বাংলা কীবোর্ড বা Avro Phonetic ইনপুট মেথড ব্যবহার করুন। যেকোনো ধাপে ক্লিক করা যাবে — লক থাকলে আগের ধাপ শেষ করার অনুরোধ জানানো হবে।</div>';
+
+    CHAPTER_ORDER.forEach(ch=>{
+      const chLevels = levels.map((l,i)=>({...l, num:i+1})).filter(l=>l.chapter===ch);
+      html += '<div class="chapter"><div class="chapter-head"><h2>'+ch+'</h2><span>'+chLevels[0].num+'–'+chLevels[chLevels.length-1].num+'</span></div>';
+      html += '<div class="node-row">';
+      chLevels.forEach(l=>{
+        const isDone = !!progress.scores[l.num];
+        const isCurrent = l.num === progress.unlocked && !isDone;
+        const isLocked = l.num > progress.unlocked && !isDone;
+        let cls = 'node';
+        if(isDone) cls += ' done';
+        if(isCurrent) cls += ' current';
+        if(isLocked) cls += ' locked';
+        const inner = isLocked
+          ? '<span class="lock">&#128274;</span>'
+          : (l.num + (isDone ? '<div class="stars">'+'&#9733;'.repeat(progress.scores[l.num].stars)+'</div>' : ''));
+        html += '<div class="'+cls+'" data-level="'+l.num+'" data-locked="'+isLocked+'" title="'+l.title+'">'+inner+'</div>';
+      });
+      html += '</div></div>';
+    });
+
+    html += '<footer>প্রতিদিন কিছুক্ষণ অনুশীলন করলে আপনি দ্রুত বাংলা টাইপিং-এ দক্ষ হয়ে উঠবেন। &nbsp;•&nbsp; <span id="resetBtn" style="cursor:pointer;text-decoration:underline;">অগ্রগতি রিসেট করুন</span></footer>';
+    return html;
+  }
+
+  function attachMapHandlers(){
+    document.querySelectorAll('.node').forEach(node=>{
+      node.addEventListener('click', ()=>{
+        const num = parseInt(node.getAttribute('data-level'),10);
+        const isLocked = node.getAttribute('data-locked')==='true';
+        if(isLocked){
+          openLockModal('এই ধাপ খেলতে হলে আগে ধাপ '+progress.unlocked+' পর্যন্ত সম্পন্ন করুন। তবুও চাইলে এখনই এই ধাপ খেলতে পারেন।', num);
+          return;
+        }
+        startLevel(num);
+      });
+    });
+    const resetBtn = document.getElementById('resetBtn');
+    if(resetBtn) resetBtn.addEventListener('click', ()=>{
+      if(confirm('আপনার সমস্ত অগ্রগতি মুছে ফেলা হবে। আপনি কি নিশ্চিত?')) resetProgress();
+    });
+  }
+
+  function renderPractice(){
+    const lvl = levels[currentLevel-1];
+    let html = '';
+    html += '<div class="practice-card">';
+    html += '<div class="practice-top"><button class="back-btn" id="backBtn">&larr; মানচিত্র</button><span class="level-tag">ধাপ '+currentLevel+' / '+TOTAL_LEVELS+' &middot; '+lvl.chapter+'</span></div>';
+    html += '<div class="level-title">'+lvl.title+'</div>';
+    html += '<div class="typed-line" id="typedLine"></div>';
+    html += '<div class="type-area" id="typeArea" tabindex="-1">';
+    html += '<div id="targetText"></div>';
+    html += '<input type="text" id="hiddenInput" class="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="bn" dir="auto" value="'+(session?escapeHtml(session.typedRaw):'')+'">';
+    html += '<span class="hint">ক্লিক করে টাইপ শুরু করুন</span>';
+    html += '</div>';
+    html += '<div class="progress-bar"><div class="fill" id="progFill" style="width:0%"></div></div>';
+    html += '<div class="stats-row">';
+    html += '<div class="box"><div class="v" id="statWpm">0</div><div class="l">WPM</div></div>';
+    html += '<div class="box"><div class="v" id="statAcc">100%</div><div class="l">নির্ভুলতা</div></div>';
+    html += '<div class="box"><div class="v" id="statTime">0s</div><div class="l">সময়</div></div>';
+    html += '</div>';
+    html += '<div class="actions actions-split">';
+    html += '<div class="actions-left"><button class="btn btn-ghost" id="restartBtn">পুনরায় শুরু</button></div>';
+    html += '<div class="actions-right">'+(currentLevel>1?'<button class="btn btn-ghost" id="prevBtn">&larr; পূর্ববর্তী</button>':'')+'<button class="btn btn-gold" id="skipNextBtn">পরবর্তী &rarr;</button></div>';
+    html += '</div>';
+    html += '</div>';
+
+    if(session && session.finished){
+      const s = progress.scores[currentLevel];
+      const isLast = currentLevel === TOTAL_LEVELS;
+      html += '<div class="overlay"><div class="results-card">';
+      html += '<div class="stars-big">'+'&#9733;'.repeat(s.stars)+'<span style="color:var(--border);">'+'&#9733;'.repeat(3-s.stars)+'</span></div>';
+      html += '<h3>চমৎকার!</h3><div class="sub">'+lvl.title+' সম্পন্ন হয়েছে</div>';
+      html += '<div class="results-grid"><div class="box"><div class="v">'+s.wpm+'</div><div class="l">WPM</div></div><div class="box"><div class="v">'+s.accuracy+'%</div><div class="l">নির্ভুলতা</div></div></div>';
+      if(isLast){
+        html += '<div style="color:var(--gold);font-family:\'Baloo Da 2\',sans-serif;margin-bottom:16px;">আপনি সবগুলো ধাপ শেষ করেছেন — আপনি এখন একজন বাংলা টাইপিং মাস্টার! &#127942;</div>';
+        html += '<div class="actions" style="justify-content:center;"><button class="btn btn-ghost" id="retryBtn">আবার অনুশীলন</button><button class="btn btn-gold" id="mapBtn">মানচিত্রে ফিরুন</button></div>';
+      } else {
+        html += '<div class="actions" style="justify-content:center;"><button class="btn btn-ghost" id="retryBtn">আবার</button><button class="btn btn-gold" id="nextBtn">পরবর্তী ধাপ &rarr;</button></div>';
+      }
+      html += '</div></div>';
+    }
+    return html;
+  }
+
+  function attachPracticeHandlers(){
+    renderTargetOnly();
+    renderTypedLine();
+    updateStatsOnly();
+    const backBtn = document.getElementById('backBtn');
+    if(backBtn) backBtn.addEventListener('click', goMap);
+    const restartBtn = document.getElementById('restartBtn');
+    if(restartBtn) restartBtn.addEventListener('click', retryLevel);
+    const skipNextBtn = document.getElementById('skipNextBtn');
+    if(skipNextBtn) skipNextBtn.addEventListener('click', nextLevel);
+    const prevBtn = document.getElementById('prevBtn');
+    if(prevBtn) prevBtn.addEventListener('click', prevLevel);
+    const typeArea = document.getElementById('typeArea');
+    const input = document.getElementById('hiddenInput');
+    if(typeArea && input){
+      typeArea.addEventListener('click', ()=> input.focus());
+      input.addEventListener('input', (e)=> onType(e.target.value));
+      if(session && session.finished) input.disabled = true;
+    }
+    const retryBtn = document.getElementById('retryBtn');
+    if(retryBtn) retryBtn.addEventListener('click', retryLevel);
+    const nextBtn = document.getElementById('nextBtn');
+    if(nextBtn) nextBtn.addEventListener('click', nextLevel);
+    const mapBtn = document.getElementById('mapBtn');
+    if(mapBtn) mapBtn.addEventListener('click', goMap);
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && view === 'practice' && session && session.finished){
+      e.preventDefault();
+      if(currentLevel < TOTAL_LEVELS) nextLevel(); else goMap();
+    }
+  });
+
+  /* ================= THEME TOGGLE ================= */
+  let currentTheme = 'light';
+  function applyTheme(){
+    document.body.classList.toggle('light-theme', currentTheme==='light');
+    const btn = document.getElementById('themeToggleBtn');
+    if(btn) btn.textContent = currentTheme==='dark' ? '\u2600\uFE0F' : '\u{1F319}';
+  }
+  function loadTheme(){
+    try{
+      const val = localStorage.getItem('bangla-typing-theme');
+      if(val === 'light' || val === 'dark') currentTheme = val;
+    }catch(e){}
+    applyTheme();
+  }
+  function toggleTheme(){
+    currentTheme = currentTheme==='dark' ? 'light' : 'dark';
+    applyTheme();
+    try{ localStorage.setItem('bangla-typing-theme', currentTheme); }catch(e){}
+  }
+  function initThemeToggle(){
+    const btn = document.createElement('button');
+    btn.id = 'themeToggleBtn';
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-label','থিম পরিবর্তন করুন');
+    btn.textContent = '\u2600\uFE0F';
+    btn.addEventListener('click', toggleTheme);
+    document.body.appendChild(btn);
+    loadTheme();
+  }
+  initThemeToggle();
+
+  loadProgress();
+})();
+</script>
+</body>
+</html>
